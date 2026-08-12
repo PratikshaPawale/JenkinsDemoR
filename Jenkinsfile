@@ -23,9 +23,9 @@ pipeline {
                         python --version
                         cd /d "%WORKSPACE%"
                         python -m venv "%VENV_DIR%"
-                        "%WORKSPACE%\%VENV_DIR%\Scripts\python.exe" -m pip install --upgrade pip
-                        "%WORKSPACE%\%VENV_DIR%\Scripts\python.exe" -m pip install -r "%WORKSPACE%\%PROJECT_DIR%\requirements.txt"
-                        "%WORKSPACE%\%VENV_DIR%\Scripts\python.exe" -m playwright install chromium
+                        "%WORKSPACE%/%VENV_DIR%/Scripts/python.exe" -m pip install --upgrade pip
+                        "%WORKSPACE%/%VENV_DIR%/Scripts/python.exe" -m pip install -r "%WORKSPACE%/%PROJECT_DIR%/requirements.txt"
+                        "%WORKSPACE%/%VENV_DIR%/Scripts/python.exe" -m playwright install chromium
                     '''
                 }
             }
@@ -36,8 +36,8 @@ pipeline {
                 script {
                     bat '''
                         @echo on
-                        cd /d "%WORKSPACE%\%PROJECT_DIR%"
-                        "%WORKSPACE%\%VENV_DIR%\Scripts\python.exe" -m pytest -q
+                        cd /d "%WORKSPACE%/%PROJECT_DIR%"
+                        "%WORKSPACE%/%VENV_DIR%/Scripts/python.exe" -m pytest -q
                     '''
                 }
             }
@@ -48,7 +48,7 @@ pipeline {
                 script {
                     bat '''
                         @echo on
-                        cd /d "%WORKSPACE%\%PROJECT_DIR%"
+                        cd /d "%WORKSPACE%/%PROJECT_DIR%"
                         dir
                         if exist allure-results (dir allure-results) else (echo No allure-results directory found)
                     '''
