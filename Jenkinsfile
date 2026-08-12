@@ -17,13 +17,15 @@ pipeline {
         stage('Setup Python Environment') {
             steps {
                 script {
-                    sh '''
-                        python3 --version
-                        cd "$WORKSPACE/$PROJECT_DIR"
-                        python3 -m venv "$WORKSPACE/$VENV_DIR"
-                        . "$WORKSPACE/$VENV_DIR/bin/activate"
-                        python -m pip install --upgrade pip
-                        pip install -r requirements.txt
+                    bat '''
+                        @echo on
+                        where python
+                        python --version
+                        cd /d "%WORKSPACE%"
+                        python -m venv "%VENV_DIR%"
+                        "%WORKSPACE%\%VENV_DIR%\Scripts\python.exe" -m pip install --upgrade pip
+                        "%WORKSPACE%\%VENV_DIR%\Scripts\python.exe" -m pip install -r "%WORKSPACE%\%PROJECT_DIR%\requirements.txt"
+                        "%WORKSPACE%\%VENV_DIR%\Scripts\python.exe" -m playwright install chromium
                     '''
                 }
             }
@@ -32,10 +34,10 @@ pipeline {
         stage('Run API Tests') {
             steps {
                 script {
-                    sh '''
-                        cd "$WORKSPACE/$PROJECT_DIR"
-                        . "$WORKSPACE/$VENV_DIR/bin/activate"
-                        pytest -q
+                    bat '''
+                        @echo on
+                        cd /d "%WORKSPACE%\%PROJECT_DIR%"
+                        "%WORKSPACE%\%VENV_DIR%\Scripts\python.exe" -m pytest -q
                     '''
                 }
             }
@@ -44,10 +46,11 @@ pipeline {
         stage('Publish Results') {
             steps {
                 script {
-                    sh '''
-                        cd "$WORKSPACE/$PROJECT_DIR"
-                        ls -la
-                        ls -la allure-results || true
+                    bat '''
+                        @echo on
+                        cd /d "%WORKSPACE%\%PROJECT_DIR%"
+                        dir
+                        if exist allure-results (dir allure-results) else (echo No allure-results directory found)
                     '''
                 }
                 archiveArtifacts artifacts: 'API_Testing/reports/**', fingerprint: true, allowEmptyArchive: true
