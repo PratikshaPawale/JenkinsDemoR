@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"TC010 - Verify GET /posts/1 returns expected data","19","test_TC010_get_post_by_id","tests","2026-08-10","passed","2026-08-10","","test_api_posts","",""
+"TC011 - Verify POST /posts creates a post and returns 201/201-like response","640","test_TC011_create_post","tests","2026-08-10","passed","2026-08-10","","test_api_posts","",""
+"TC002 - Verify posts list endpoint returns 200","13","test_TC002_get_posts_list","tests","2026-08-10","passed","2026-08-10","","test_api_auth_playwright","",""
+"TC020 - Verify GET /users returns a list of users","58","test_TC020_get_users_list","tests","2026-08-10","passed","2026-08-10","","test_api_users","",""
+"TC021 - Verify GET /users/1 contains expected fields","17","test_TC021_get_user_by_id","tests","2026-08-10","passed","2026-08-10","","test_api_users","",""
+"TC001 - Verify base endpoint is reachable","146","test_TC001_get_root","tests","2026-08-10","passed","2026-08-10","","test_api_auth_playwright","",""

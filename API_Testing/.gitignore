@@ -1,0 +1,4 @@
+allure-results/
+reports/report.html
+__pycache__/
+.env
