@@ -64,7 +64,7 @@ pipeline {
             echo 'Pipeline finished.'
         }
         failure {
-            echo 'Build failed. Check test results and logs'
+            echo 'Build failed. Check test results'
         }
         success {
             echo 'Build passed successfully.'
